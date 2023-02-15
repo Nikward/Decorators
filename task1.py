@@ -1,12 +1,12 @@
 import os
 import datetime
 
+
 def logger(old_function):
     date = datetime.datetime.now()
     name_function = old_function.__name__
 
     def new_function(*args, **kwargs):
-
         result = old_function(*args, **kwargs)
         with open('main.log', 'a', encoding='utf-8') as log:
             log.write(f'Название вызванной функции: {str(name_function)}m\n')

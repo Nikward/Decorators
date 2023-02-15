@@ -1,13 +1,22 @@
 import os
+import datetime
 
 
 def logger(path):
-    ...
-    
+    date = datetime.datetime.now()
+
+
     def __logger(old_function):
         def new_function(*args, **kwargs):
-            ...
-
+            name_function = old_function.__name__
+            result = old_function(*args, **kwargs)
+            with open(path, 'a', encoding='utf-8') as log:
+                log.write(f'Название вызванной функции: {str(name_function)}m\n')
+                log.write(f'Дата вызова: {str(date)} \n')
+                log.write(str(args) + '\n')
+                log.write(str(kwargs) + '\n')
+                log.write(f'Возвращаемое значение: {str(result)} \n\n')
+            return result
         return new_function
 
     return __logger
